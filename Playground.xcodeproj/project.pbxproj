@@ -12,6 +12,7 @@
 		B72EB20E2632DD640078C010 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B72EB20D2632DD640078C010 /* Assets.xcassets */; };
 		B72EB2112632DD640078C010 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B72EB2102632DD640078C010 /* Preview Assets.xcassets */; };
 		B72EB21B2632DD7D0078C010 /* CodeViewer in Frameworks */ = {isa = PBXBuildFile; productRef = B72EB21A2632DD7D0078C010 /* CodeViewer */; };
+		B72EB2212632E5890078C010 /* JavaScriptEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72EB2202632E5890078C010 /* JavaScriptEngine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		B72EB2102632DD640078C010 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B72EB2122632DD640078C010 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B72EB21D2632DE480078C010 /* Playground.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Playground.entitlements; sourceTree = "<group>"; };
+		B72EB2202632E5890078C010 /* JavaScriptEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaScriptEngine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				B72EB20D2632DD640078C010 /* Assets.xcassets */,
 				B72EB2122632DD640078C010 /* Info.plist */,
 				B72EB20F2632DD640078C010 /* Preview Content */,
+				B72EB2202632E5890078C010 /* JavaScriptEngine.swift */,
 			);
 			path = Playground;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B72EB2212632E5890078C010 /* JavaScriptEngine.swift in Sources */,
 				B72EB20C2632DD610078C010 /* ContentView.swift in Sources */,
 				B72EB20A2632DD610078C010 /* PlaygroundApp.swift in Sources */,
 			);
