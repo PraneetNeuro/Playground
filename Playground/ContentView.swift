@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CodeViewer
+import JavaScriptCore
 
 struct EditorView: View {
     @Binding var jsCode: String
@@ -19,11 +20,12 @@ struct EditorView: View {
 
 struct ContentView: View {
     @State var jsCode: String = ""
+    var jsEngine: JSEngine = JSEngine.shared
     var body: some View {
         HStack {
             List {
                 Button(action: {
-                    // RUN SOURCE
+                    print(jsEngine.run(source: jsCode))
                 }, label: {
                     Label("Run", systemImage: "play.fill")
                 })

@@ -15,7 +15,7 @@ class JSEngine {
         context = JSContext()
     }
     
-    public var shared: JSEngine = JSEngine()
+    public static var shared: JSEngine = JSEngine()
     
     public func run(source: String) -> JSValue {
         return context.evaluateScript(source)
