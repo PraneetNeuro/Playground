@@ -10,36 +10,43 @@ import CodeViewer
 import JavaScriptCore
 
 struct ConsoleView: View {
-    @Binding var result: String
+    @Binding var result: [String]
     var body: some View {
-        HStack{
-            VStack {
-                Text(result)
-            }.frame(height: 250)
-            Spacer()
-        }
+        ScrollView {
+            HStack {
+                VStack(alignment: .leading) {
+                    ForEach(result, id: \.self){ partialResult in
+                        Text(partialResult)
+                    }
+                }
+                .padding()
+                Spacer()
+            }
+        }.background(Color.init(.systemGray5))
+        .frame(height: 250)
     }
 }
 
 struct EditorView: View {
     @Binding var jsCode: String
+    @Binding var isResultShown: Bool
     var body: some View {
-        CodeViewer(content: $jsCode, mode: .javascript, darkTheme: .dracula, lightTheme: .clouds, isReadOnly: false, fontSize: 16, textDidChanged: { source in
-            print(source)
-        })
+        CodeViewer(content: $jsCode, mode: .javascript, darkTheme: .dracula, lightTheme: .clouds, isReadOnly: false, fontSize: 16)
+        .onTapGesture {
+            isResultShown = false
+        }
     }
 }
 
 struct ContentView: View {
     @State var jsCode: String = ""
-    @State var result: String = ""
     @State var isResultShown: Bool = false
-    var jsEngine: JSEngine = JSEngine.shared
+    @ObservedObject var jsEngine: JSEngine = JSEngine.shared
     var body: some View {
         HStack {
             List {
                 Button(action: {
-                    result = "\(jsEngine.run(source: jsCode))"
+                    jsEngine.run(source: jsCode)
                     isResultShown = true
                 }, label: {
                     Label("Run", systemImage: "play.fill")
@@ -48,9 +55,9 @@ struct ContentView: View {
             .frame(width: 200)
             .listStyle(InsetGroupedListStyle())
             VStack {
-                EditorView(jsCode: $jsCode)
+                EditorView(jsCode: $jsCode, isResultShown: $isResultShown)
                 if isResultShown {
-                    ConsoleView(result: $result)
+                    ConsoleView(result: $jsEngine.results)
                 }
             }
         }
