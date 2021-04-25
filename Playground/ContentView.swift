@@ -11,6 +11,7 @@ import JavaScriptCore
 
 struct ConsoleView: View {
     @Binding var result: [String]
+    @Binding var height: CGFloat
     var body: some View {
         ScrollView {
             HStack {
@@ -23,7 +24,7 @@ struct ConsoleView: View {
                 Spacer()
             }
         }.background(Color.init(.systemGray5))
-        .frame(height: 250)
+        .frame(height: height)
     }
 }
 
@@ -41,9 +42,10 @@ struct EditorView: View {
 struct ContentView: View {
     @State var jsCode: String = ""
     @State var isResultShown: Bool = false
+    @State var resultViewHeight: CGFloat = CGFloat(250)
     @ObservedObject var jsEngine: JSEngine = JSEngine.shared
     var body: some View {
-        HStack {
+        NavigationView {
             List {
                 Button(action: {
                     jsEngine.run(source: jsCode)
@@ -52,14 +54,23 @@ struct ContentView: View {
                     Label("Run", systemImage: "play.fill")
                 })
             }
-            .frame(width: 200)
-            .listStyle(InsetGroupedListStyle())
+            .listStyle(SidebarListStyle())
+            .navigationBarTitle("", displayMode: .inline)
+            .navigationBarHidden(true)
             VStack {
                 EditorView(jsCode: $jsCode, isResultShown: $isResultShown)
                 if isResultShown {
-                    ConsoleView(result: $jsEngine.results)
+                    ConsoleView(result: $jsEngine.results, height: $resultViewHeight)
+                        .gesture(
+                            DragGesture()
+                                .onChanged { gesture in
+                                    self.resultViewHeight += -gesture.translation.height
+                                }
+                        )
                 }
             }
+            .navigationBarTitle("", displayMode: .inline)
+            .navigationBarHidden(true)
         }
     }
 }

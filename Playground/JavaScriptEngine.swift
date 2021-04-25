@@ -13,9 +13,11 @@ class JSEngine: ObservableObject {
     @Published var results: [String] = []
     private init(){
         context = JSContext()
+        
         let logHandler: @convention(block) (String) -> Void = { [self] string in
             results.append(string)
         }
+        
         context.setObject(logHandler, forKeyedSubscript: "log" as (NSCopying & NSObjectProtocol)?)
     }
     
